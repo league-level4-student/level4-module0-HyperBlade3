@@ -23,9 +23,10 @@ public class MazeMaker{
 		
 		//4. select a random cell to start
 		
+		Cell randCell = uncheckedCells.get(randGen.nextInt(uncheckedCells.size())) ;
 		
 		//5. call selectNextPath method with the randomly selected cell
-		
+		selectNextPath(randCell);
 		
 		return maze;
 	}
@@ -34,7 +35,15 @@ public class MazeMaker{
 	private static void selectNextPath(Cell currentCell) {
 		//A. mark cell as visited
 
+		currentCell.setBeenVisited(true);
+		
 		//B. Get an ArrayList of unvisited neighbors using the current cell and the method below
+		
+		if (currentCell.hasBeenVisited() == false) {
+			
+			
+			
+		}
 		
 		//C. if has unvisited neighbors,
 		
