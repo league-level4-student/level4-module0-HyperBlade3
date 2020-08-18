@@ -16,14 +16,14 @@ public class Maze {
 
 		// 2. Initialize the cells using the width and height varibles
 
-		cells = new Cell[width][height];
+		cells = new Cell[height][width];
 
 		// 3. Iterated through each cell and initialize it
 		// using i and j as the location
 
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells[i].length; j++) {
-				cells[i][j] = new Cell(i, j);
+				cells[i][j] = new Cell(j, i);
 			}
 		}
 	}
@@ -34,13 +34,14 @@ public class Maze {
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells[i].length; j++) {
 				cells[i][j].draw(g);
+				
 			}
 		}
 
 	}
 
 	// 4b. This method returns the selected cell.
-	public Cell getCell(int x, int y) {
+	public Cell getCell(int x, int y) {	
 
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells[i].length; j++) {

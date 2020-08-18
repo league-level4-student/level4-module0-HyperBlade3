@@ -41,12 +41,96 @@
 
 package extras.the_wrong_way_cow;
 
+import java.util.HashMap;
+
 public class TheWrongWayCow {
 
-    public static int[] findWrongWayCow(final char[][] field) {
-        // Fill in the code to return the x,y coordinate position of the
-        // head (letter 'c') of the wrong way cow!
-        
-        return null;
-    }
+	public static int[] findWrongWayCow(final char[][] field) {
+		// head (letter 'c') of the wrong way cow!\
+
+		HashMap<String, int[]> map = new HashMap<String, int[]>(4);
+		
+		int[] rowColumn = null;
+		
+		
+		
+		int northCount = 0;
+		int southCount = 0;
+		int eastCount = 0;
+		int westCount = 0;
+		
+
+		for (int i = 0; i < field.length-2; i++) {
+			for (int j = 0; j < field[i].length-2; j++) {
+
+				if (map.size() > 1 && (northCount + southCount + eastCount + westCount)  > 2) {
+					i = field.length;
+					break;
+				}
+				
+				if (field[i][j] == 'c') {
+					int numRows = field.length;
+					int numCols = field[i].length;
+					
+					//North
+					if (northCount < 2) {
+						if (i+2 < numRows && field[i+1][j] == 'o' && field[i+2][j] == 'w') {
+							map.put("north", new int[] {j, i});
+							northCount++;
+							continue;
+						}
+					}
+					//South
+					if (southCount < 2) {
+						if (i-2 >= 0 && field[i-1][j] == 'o' && field[i-2][j] == 'w') {
+							map.put("south", new int[] {j, i});
+							southCount++;
+							continue;
+						}
+					}
+					//West
+					if (westCount < 2) {
+						if (j + 2 < numCols && field[i][j+1] == 'o' && field[i][j+2] == 'w') {
+							map.put("west", new int[] {j, i});
+							westCount++;
+							continue;
+						}
+					}
+					//East
+					if (eastCount < 2) {
+						if (j-2 >= 0 && field[i][j-1] == 'o' && field[i][j-2] == 'w') {
+							map.put("east", new int[] {j, i});
+							eastCount++;
+							continue;
+						}
+					}
+				}
+				
+			}
+
+		}
+		
+		if (eastCount == 1) {
+			rowColumn = map.get("east");
+			System.out.println("east");
+			System.out.println(map.get("east"));
+		}
+		else if (westCount == 1) {
+			rowColumn = map.get("west");
+			System.out.println("west");
+			System.out.println(map.get("weset"));
+		}
+		else if (southCount == 1) {
+			rowColumn = map.get("south");
+			System.out.println("south");
+			System.out.println(map.get("south"));
+		}
+		else {
+			rowColumn = map.get("north");
+			System.out.println("north");
+			System.out.println(map.get("north"));
+		}
+		
+		return rowColumn;
+	}
 }
